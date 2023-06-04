@@ -1,0 +1,103 @@
+{{ define "inputWeeklyStats" }}
+
+<div id="mainContainer">
+
+	<div class="ui segment">
+		<div class="ui form" id="weeklyStatForm" name="weeklyStatForm">
+			<h2 class="ui dividing header">Input Weekly Stats</h2>
+			<!-- FIRST ROW START -->
+			<div class="four fields">
+				<!-- W/E FIELD START -->
+				<div class="three wide field weekending">
+					<label>Weekending: </label>
+					<select class="ui dropdown weekendingDates" name="we" id="weDropDown">
+						{{range .Weeks}}
+						<option>{{ . }}</option>
+						{{end}}
+					</select>
+				</div>
+			</div>
+			<div class="fields">
+				<div class="three wide field">
+			    <label>VSD</label>
+					<div class="field">
+						<input type="text" name="vsd" placeholder="VSD" id="vsd">
+					</div>
+				</div>
+				<div class="three wide field">
+			    <label>GI</label>
+					<div class="field">
+						<input type="text" name="gi" placeholder="GI" id="gi">
+					</div>
+				</div>
+				<div class="three wide field">
+			    <label>Job Sites Done</label>
+					<div class="field">
+						<input type="text" name="sites" placeholder="Job Sites" id="sites">
+					</div>
+				</div>
+				<div class="three wide field">
+			    <label>Expenses</label>
+					<div class="field">
+						<input type="text" name="expenses" placeholder="Expenses" id="expenses">
+					</div>
+				</div>
+				<div class="three wide field">
+			    <label>Scheduled</label>
+					<div class="field">
+						<input type="text" name="scheduled" placeholder="Scheduled" id="scheduled">
+					</div>
+				</div>
+		  </div>
+			<div class="columns two wide">
+				<!-- <button class="ui button column" onclick="PrepsRFGenerator.generateRoutingForms()">Print Preps Routing Forms</button>	             -->
+				<button class="ui positive button column" id="sub">Submit</button>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script>
+	$( document ).ready(function() {
+		$("#inputWeeklyIcon").css("visibility", "visible")
+
+		$("#sub").on('click', function(){
+      var obj = {
+				date: $("#weDropDown").val(),
+				vsd: $("#vsd").val(),
+				gi: $("#gi").val(),
+				sites: $("#sites").val(),
+				expenses: $("#expenses").val(),
+				scheduled: $("#scheduled").val()
+      }
+      $.ajax({
+        type: "POST",
+        url: "/services/logWeeklyStats",
+        data: obj
+      })
+			.done(function(data) {
+				console.log(data)
+				$("#alertHeader").html("SUCCESS");
+				$("#alertMessage").html(data);
+				$("#alertIcon").html('<i class="check circle icon green"></i>');
+				$("#alertModal").modal('show');
+				$('input').val('');
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+				console.log(jqXHR)
+				$("#alertHeader").html("ERROR");
+				$("#alertMessage").html(jqXHR.responseText);
+				$("#alertIcon").html('<i class="ban icon red"></i>');
+				$("#alertModal").modal('show');
+      });
+
+			$("#okButton").on('click', function(){
+				$("#alertModal").modal('hide');
+			})
+    })
+
+	})
+</script>
+
+{{end}}

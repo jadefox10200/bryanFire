@@ -1,0 +1,26 @@
+{{define "home"}}
+
+<div id="homeBody">
+
+<h2 class="ui dividing header center-it">INSTRUCTION VIDEO</h2>
+
+			<div class="ui container center-it">
+				<video WIDTH=863 HEIGHT=539 autostart="0" controls="controls" id="howTo1">
+					<source src="/AV/Instruction_Video_YT.mov" type="video/mp4">
+					<param name="autoplay" value="false" />
+				</video>
+				<label for="howTo1">How to log and view stats</label>
+			</div>
+
+
+</div>
+<script>
+
+	$( document ).ready( function() {
+			$("#homeIcon").css("visibility", "visible")
+	});
+
+
+</script>
+
+{{end}}

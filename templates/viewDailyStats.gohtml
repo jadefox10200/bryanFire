@@ -1,0 +1,122 @@
+{{ define "viewDailyStats" }}
+
+<div id="mainContainer">
+	<div class="ui segment">
+		<div class="ui form">
+			<h2 class="ui dividing header">View Daily 7R</h2>
+			<!-- FIRST ROW START -->
+			<div class="four fields">
+				<div class="field weekending">
+					<label>Weekending: </label>
+					<select class="ui dropdown weekendingDates" name="we" id="weDropDown">
+						{{range .Weeks}}
+						<option>{{ . }}</option>
+						{{end}}
+					</select>
+				</div>
+			</div>
+
+			<div class="columns two wide">
+				<button class="ui button column" id="vsdButton" name="vsd">VSD</button>
+		    <button class="ui button column" id="giButton" name="gi">GI</button>
+				<button class="ui button column" id="sitesButton" name="sites">Job Sites Done</button>
+			</div>
+
+		</div>
+	</div>
+	<div id="container">
+	</div>
+	<!--  -->
+
+</div>
+<script>
+	$( document ).ready(function() {
+
+		$("#viewDailyIcon").css("visibility", "visible")
+
+		$("button").click(function(){
+			var statName = $(this).attr('name');
+			var date = $("#weDropDown :selected").val()
+			console.log(statName)
+			$.ajax({
+				type: "GET",
+				url: "/services/getDailyStats?stat="+ statName +"&date=" + date + "",
+			})
+			.done(function(data,status) {
+				console.table("data", data)
+				jsonData = JSON.parse(data)
+				var dlen = jsonData.length
+				var thisWkSeries = []
+				var lastWkSeries = []
+				var cumSeries = []
+				var quotaSeries = []
+				var dateSeries = []
+				console.log("parsed", jsonData)
+
+				for (var i = 0; i < dlen; i++){
+					console.log(jsonData[i])
+					thisWkSeries[i] = jsonData[i].ThisWeek
+					lastWkSeries[i] = jsonData[i].LastWeek
+					cumSeries[i] = jsonData[i].Cum
+					quotaSeries[i] = jsonData[i].Quota
+					dateSeries[i] = jsonData[i].Day
+				}
+				console.log(quotaSeries)
+				drawChart(statName.toUpperCase(), dateSeries, thisWkSeries, lastWkSeries, cumSeries, quotaSeries)
+      })
+
+		});
+
+		$("#okButton").on('click', function(){
+			$("#alertModal").modal('hide');
+		})
+
+		//
+		function drawChart(name, dateSeries, thisWkSeries, lastWkSeries, cumSeries, quotaSeries) {
+			Highcharts.chart('container', {
+			    chart: {
+			        type: 'line'
+			    },
+			    title: {
+			        text: name
+			    },
+			    // subtitle: {
+			    //     text: 'Source: WorldClimate.com'
+			    // },
+			    xAxis: {
+			        categories: dateSeries
+			    },
+			    yAxis: {
+			        title: {
+			            text: "Amount"
+			        }
+			    },
+
+			    plotOptions: {
+			        line: {
+			            dataLabels: {
+			                enabled: true
+			            },
+			            enableMouseTracking: true
+			        }
+			    },
+					series: [{
+			        name: 'This Week',
+			        data: thisWkSeries
+			    }, {
+			        name: 'This Week Cumulative',
+			        data: cumSeries
+			    }, {
+			        name: 'Last Week Cumulative',
+			        data: lastWkSeries
+			    }, {
+			        name: 'Quota',
+			        data: quotaSeries
+			    }]
+			});
+		}
+		//
+	})
+</script>
+
+{{end}}

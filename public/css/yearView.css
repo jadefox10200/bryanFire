@@ -1,0 +1,28 @@
+
+#yearlyBody {
+	width: 100%;
+	margin: auto;
+}
+
+#mainContainer {
+	min-height: 500px;
+}
+
+.monthBox {
+  font-size: 10px!important;
+  margin-bottom:15px!important;
+}
+
+.statData {
+	float: right;
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
+a:hover {
+	color: grey;
+	text-decoration: none;
+}

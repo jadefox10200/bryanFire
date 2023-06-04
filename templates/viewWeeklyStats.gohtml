@@ -1,0 +1,102 @@
+{{ define "viewWeeklyStats" }}
+
+<div id="mainContainer">
+	<div class="ui segment">
+		<h2 class="ui dividing header">View Weekly Stats</h2>
+		<!-- FIRST ROW START -->
+		<div class="columns two wide">
+			<button class="ui button column" id="vsdButton" name="vsd">VSD</button>
+	    <button class="ui button column" id="giButton" name="gi">GI</button>
+			<button class="ui button column" id="expenseButton" name="expenses">Expenses</button>
+	    <button class="ui button column" id="profitButton" name="profit">Profit</button>
+	    <button class="ui button column" id="scheduledButton" name="scheduled">Scheduled</button>
+			<button class="ui button column" id="sitesButton" name="sites">Job Sites Done</button>
+		</div>
+	</div>
+	<div id="container">
+	</div>
+</div>
+<script>
+	$( document ).ready(function() {
+		$("#viewWeeklyIcon").css("visibility", "visible")
+
+		$("button").click(function(){
+			var statName = $(this).attr('name');
+			console.log(statName)
+		  $.get("/services/getWeeklyStats?stat="+ statName +"",function(data,status){
+		    // alert("Data: " + data + "\nStatus: " + status);
+		    console.table("data", data)
+				jsonData = JSON.parse(data)
+				var dlen = jsonData.length
+				var dataSeries = []
+				var dateSeries = []
+				console.log("parsed", jsonData)
+
+				for (var i = 0; i < dlen; i++){
+					console.log(jsonData[i])
+					dataSeries[i] = jsonData[i].Value
+					dateSeries[i] = jsonData[i].WeekEnding
+				}
+				var vales = ""
+				var b = false
+				switch(statName) {
+					case "gi": vales = "Income"
+						break
+					case "vsd": vales = "Value"
+						break
+					case "expenses": vales = "Money"
+						b = true
+						break
+					case "profit": vales = "Money"
+						break
+					case "scheduled": vales = "Number Scheduled"
+						break
+					case "sites": vales = "Number of Sites"
+						break
+					default: vales = "Number"
+				}
+
+				drawChart(statName.toUpperCase(), b, vales, dateSeries, dataSeries)
+		  });
+		});
+
+		function drawChart(name, b, vales, dateSeries, dataSeries) {
+			console.log(dateSeries)
+			Highcharts.chart('container', {
+			    chart: {
+			        type: 'line'
+			    },
+			    title: {
+			        text: name
+			    },
+			    // subtitle: {
+			    //     text: 'Source: WorldClimate.com'
+			    // },
+			    xAxis: {
+			        categories: dateSeries
+			    },
+			    yAxis: {
+							reversed: b,
+			        title: {
+			            text: vales
+			        }
+			    },
+			    plotOptions: {
+			        line: {
+			            dataLabels: {
+			                enabled: true
+			            },
+			            enableMouseTracking: true
+			        }
+			    },
+			    series: [{
+			        name: vales,
+			        data: dataSeries
+			    }]
+			});
+		}
+
+	})
+</script>
+
+{{end}}
