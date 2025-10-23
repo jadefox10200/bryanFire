@@ -3,3 +3,684 @@
 2023/06/04 11:31:55 Failed to unmarshal csv file  :  []  with error:  empty csv file given
 2023/06/04 11:32:00 Failed to unmarshal csv file  :  []  with error:  empty csv file given
 2023/06/04 11:32:11 Failed to unmarshal csv file  :  []  with error:  empty csv file given
+2023/06/04 12:15:49 listen tcp :9090: bind: address already in use
+2023/06/04 16:32:17 Failed to decode body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 16:34:48 Failed to decode body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 16:38:09 Failed to decode body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 16:38:17 Failed to decode body  :  []  with error:  invalid character 'u' looking for beginning of value
+2023/06/04 16:38:51 Failed to decode body  :  []  with error:  invalid character 'u' looking for beginning of value
+2023/06/04 16:48:09 Failed to decode body  :  []  with error:  invalid character 'u' looking for beginning of value
+2023/06/04 16:48:59 Failed to decode body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 16:49:55 Failed to decode body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 17:06:52 Failed to unmarshal body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 17:07:13 Failed to unmarshal body  :  []  with error:  invalid character 'u' looking for beginning of value
+2023/06/04 17:18:37 Failed to unmarshal body  :  []  with error:  invalid character 'r' looking for beginning of value
+2023/06/04 17:20:08 Failed to unmarshal body  :  []  with error:  invalid character 'u' looking for beginning of value
+2023/06/04 17:23:54 Failed to unmarshal body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 17:24:17 Failed to unmarshal body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 17:26:20 Failed to unmarshal body  :  []  with error:  json: cannot unmarshal string into Go struct field SingleWeeklyStat.VSD of type float64
+2023/06/04 17:27:24 Failed to unmarshal body  :  []  with error:  json: cannot unmarshal number 12.09 into Go struct field SingleWeeklyStat.Sites of type int
+2023/06/04 17:57:35 W/E date 2023-06-01  invalid  :  []  with error:  The weekending date is invalid
+2023/06/05 21:42:44 listen tcp :9090: bind: address already in use
+2023/06/05 22:21:33 listen tcp :9090: bind: address already in use
+2025/08/02 21:03:34 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:03:34 http: panic serving [::1]:49609: runtime error: invalid memory address or nil pointer dereference
+goroutine 104 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140000bed20}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140000bed20}, 0x140000cc640)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140000bed20?}, 0x140001d9b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140000bed20}, 0x140000cc640)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140000bed20?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2750, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:03:34 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:03:34 http: panic serving [::1]:49610: runtime error: invalid memory address or nil pointer dereference
+goroutine 16 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140000bee00}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140000bee00}, 0x140000cc8c0)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140000bee00?}, 0x140001d7b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140000bee00}, 0x140000cc8c0)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140000bee00?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000102480, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:03:34 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:03:34 http: panic serving [::1]:49613: runtime error: invalid memory address or nil pointer dereference
+goroutine 131 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140000beee0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140000beee0}, 0x140000ccb40)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140000beee0?}, 0x14000291b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140000beee0}, 0x140000ccb40)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140000beee0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000102630, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:03:34 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:03:34 http: panic serving [::1]:64610: runtime error: invalid memory address or nil pointer dereference
+goroutine 2 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140000befc0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140000befc0}, 0x140000ccdc0)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140000befc0?}, 0x140001ddb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140000befc0}, 0x140000ccdc0)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140000befc0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x1400010a000, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:03:34 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:03:34 http: panic serving [::1]:49612: runtime error: invalid memory address or nil pointer dereference
+goroutine 130 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140000bf0a0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140000bf0a0}, 0x140000cd040)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140000bf0a0?}, 0x1400028bb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140000bf0a0}, 0x140000cd040)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140000bf0a0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001025a0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:03:34 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:03:34 http: panic serving [::1]:49611: runtime error: invalid memory address or nil pointer dereference
+goroutine 129 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140000bf180}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140000bf180}, 0x140000cd2c0)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140000bf180?}, 0x14000027b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140000bf180}, 0x140000cd2c0)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140000bf180?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000102510, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:03:34 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:03:34 http: panic serving [::1]:49930: runtime error: invalid memory address or nil pointer dereference
+goroutine 216 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140000be000}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140000be000}, 0x140000cc000)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140000be000?}, 0x140003ceb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140000be000}, 0x140000cc000)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140000be000?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000076000, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:03:50 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:03:50 http: panic serving [::1]:49995: runtime error: invalid memory address or nil pointer dereference
+goroutine 218 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140000be0e0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140000be0e0}, 0x140000cc280)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140000be0e0?}, 0x140003ceb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140000be0e0}, 0x140000cc280)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140000be0e0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000076120, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:04:03 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:04:03 http: panic serving [::1]:50039: runtime error: invalid memory address or nil pointer dereference
+goroutine 242 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400029e9a0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400029e9a0}, 0x14000281900)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400029e9a0?}, 0x1400028bb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400029e9a0}, 0x14000281900)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400029e9a0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d27e0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:04:03 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:04:03 http: panic serving [::1]:50040: runtime error: invalid memory address or nil pointer dereference
+goroutine 243 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400029ea80}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400029ea80}, 0x14000281b80)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400029ea80?}, 0x1400028db10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400029ea80}, 0x14000281b80)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400029ea80?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2870, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:04:03 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:04:03 http: panic serving [::1]:50038: runtime error: invalid memory address or nil pointer dereference
+goroutine 192 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400029eb60}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400029eb60}, 0x14000281e00)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400029eb60?}, 0x140001d9b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400029eb60}, 0x14000281e00)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400029eb60?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2510, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:04:03 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:04:03 http: panic serving [::1]:50037: runtime error: invalid memory address or nil pointer dereference
+goroutine 221 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400029ec40}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400029ec40}, 0x140003a4140)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400029ec40?}, 0x14000291b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400029ec40}, 0x140003a4140)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400029ec40?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140000762d0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:04:03 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:04:03 http: panic serving [::1]:50036: runtime error: invalid memory address or nil pointer dereference
+goroutine 220 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400029ed20}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400029ed20}, 0x140003a43c0)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400029ed20?}, 0x14000027b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400029ed20}, 0x140003a43c0)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400029ed20?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000076240, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:04:03 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:04:03 http: panic serving [::1]:50041: runtime error: invalid memory address or nil pointer dereference
+goroutine 244 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400029ee00}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400029ee00}, 0x140003a4640)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400029ee00?}, 0x1400028fb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400029ee00}, 0x140003a4640)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400029ee00?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2900, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:04:03 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:04:03 http: panic serving [::1]:50054: runtime error: invalid memory address or nil pointer dereference
+goroutine 283 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400029eee0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400029eee0}, 0x140003a48c0)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400029eee0?}, 0x14000210b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400029eee0}, 0x140003a48c0)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400029eee0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000282fc0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:47 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:47 http: panic serving [::1]:50171: runtime error: invalid memory address or nil pointer dereference
+goroutine 285 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140003b4000}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140003b4000}, 0x140003ac000)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140003b4000?}, 0x1400028fb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140003b4000}, 0x140003ac000)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140003b4000?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140002830e0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:47 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:47 http: panic serving [::1]:50949: runtime error: invalid memory address or nil pointer dereference
+goroutine 288 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140003b40e0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140003b40e0}, 0x140003ac280)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140003b40e0?}, 0x14000078b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140003b40e0}, 0x140003ac280)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140003b40e0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000282090, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:57 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:57 http: panic serving [::1]:50984: runtime error: invalid memory address or nil pointer dereference
+goroutine 307 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002ac9a0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002ac9a0}, 0x140002b1900)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002ac9a0?}, 0x1400028bb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002ac9a0}, 0x140002b1900)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002ac9a0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2510, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:57 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:57 http: panic serving [::1]:50986: runtime error: invalid memory address or nil pointer dereference
+goroutine 309 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002aca80}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002aca80}, 0x140002b1b80)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002aca80?}, 0x140001d9b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002aca80}, 0x140002b1b80)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002aca80?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2750, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:57 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:57 http: panic serving [::1]:50983: runtime error: invalid memory address or nil pointer dereference
+goroutine 291 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002acb60}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002acb60}, 0x140002b1e00)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002acb60?}, 0x1400028fb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002acb60}, 0x140002b1e00)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002acb60?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000282240, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:57 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:57 http: panic serving [::1]:50982: runtime error: invalid memory address or nil pointer dereference
+goroutine 290 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002acc40}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002acc40}, 0x140004b6140)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002acc40?}, 0x14000027b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002acc40}, 0x140004b6140)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002acc40?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140002821b0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:57 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:57 http: panic serving [::1]:50985: runtime error: invalid memory address or nil pointer dereference
+goroutine 308 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002acd20}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002acd20}, 0x140004b63c0)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002acd20?}, 0x140001ddb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002acd20}, 0x140004b63c0)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002acd20?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d26c0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:57 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:57 http: panic serving [::1]:50987: runtime error: invalid memory address or nil pointer dereference
+goroutine 261 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002ace00}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002ace00}, 0x140004b6640)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002ace00?}, 0x14000291b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002ace00}, 0x140004b6640)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002ace00?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001e0000, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:07:57 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:07:57 http: panic serving [::1]:51000: runtime error: invalid memory address or nil pointer dereference
+goroutine 314 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002ac000}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002ac000}, 0x140004b6000)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002ac000?}, 0x1400012cb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002ac000}, 0x140004b6000)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002ac000?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x14000280000, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:08:20 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:08:20 http: panic serving [::1]:51062: runtime error: invalid memory address or nil pointer dereference
+goroutine 329 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400009c1c0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400009c1c0}, 0x140000903c0)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400009c1c0?}, 0x1400028db10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400009c1c0}, 0x140000903c0)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400009c1c0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2000, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:08:20 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:08:20 http: panic serving [::1]:51061: runtime error: invalid memory address or nil pointer dereference
+goroutine 272 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x1400009c2a0}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x1400009c2a0}, 0x14000090640)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x1400009c2a0?}, 0x14000027b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x1400009c2a0}, 0x14000090640)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x1400009c2a0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001e0090, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:08:20 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:08:20 http: panic serving [::1]:51090: runtime error: invalid memory address or nil pointer dereference
+goroutine 370 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002ac380}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002ac380}, 0x14000490a00)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002ac380?}, 0x1400028bb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002ac380}, 0x14000490a00)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002ac380?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2bd0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:08:20 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:08:20 http: panic serving [::1]:51088: runtime error: invalid memory address or nil pointer dereference
+goroutine 336 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002ac460}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002ac460}, 0x14000490c80)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002ac460?}, 0x140001ddb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002ac460}, 0x14000490c80)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002ac460?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2ab0, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:08:20 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:08:20 http: panic serving [::1]:51089: runtime error: invalid memory address or nil pointer dereference
+goroutine 369 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002ac540}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002ac540}, 0x14000490f00)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002ac540?}, 0x1400028fb10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002ac540}, 0x14000490f00)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002ac540?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2b40, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:08:20 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:08:20 http: panic serving [::1]:51087: runtime error: invalid memory address or nil pointer dereference
+goroutine 334 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002ac620}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002ac620}, 0x14000491180)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002ac620?}, 0x140001d9b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002ac620}, 0x14000491180)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002ac620?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001d2900, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:08:20 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:08:20 http: panic serving [::1]:51099: runtime error: invalid memory address or nil pointer dereference
+goroutine 404 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1947 +0xb0
+panic({0x1025520a0?, 0x102864b50?})
+	/usr/local/go/src/runtime/panic.go:792 +0x124
+main.webFail({0x10247c922, 0x92}, {0x1025c1788, 0x140002ac700}, {0x0, 0x0}, {0x0, 0x0, 0x0})
+	/Users/stillshot/go/mygo/bryanFire/main.go:1176 +0x1d4
+main.handleLogWeeklyStats({0x1025c1788, 0x140002ac700}, 0x14000491400)
+	/Users/stillshot/go/mygo/bryanFire/main.go:1088 +0xbc
+net/http.HandlerFunc.ServeHTTP(0x10287aa40?, {0x1025c1788?, 0x140002ac700?}, 0x14000144b10?)
+	/usr/local/go/src/net/http/server.go:2294 +0x38
+net/http.(*ServeMux).ServeHTTP(0x10?, {0x1025c1788, 0x140002ac700}, 0x14000491400)
+	/usr/local/go/src/net/http/server.go:2822 +0x1b4
+net/http.serverHandler.ServeHTTP({0x1025bfe80?}, {0x1025c1788?, 0x140002ac700?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:3301 +0xbc
+net/http.(*conn).serve(0x140001e0750, {0x1025c1cb0, 0x140001935f0})
+	/usr/local/go/src/net/http/server.go:2102 +0x52c
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3454 +0x3d8
+2025/08/02 21:15:54 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:16:26 The VSD value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal.  :  []  with error:  <nil>
+2025/08/02 21:22:57 Failed to unmarshal file weekly.csv  :  []  with error:  record on line 6: wrong number of fields
+2025/08/02 21:26:44 Failed to unmarshal file weekly.csv  :  []  with error:  record on line 6: wrong number of fields
+2025/08/02 21:27:46 Failed to unmarshal file weekly.csv  :  []  with error:  record on line 2: wrong number of fields
+2025/08/02 21:28:57 Failed to unmarshal file weekly.csv  :  []  with error:  record on line 3: wrong number of fields
+2025/08/02 21:29:41 Failed to open weekly.csv  :  []  with error:  open public/stats/weekly.csv: no such file or directory
+2025/08/02 21:30:14 Failed to unmarshal file weekly.csv  :  []  with error:  record on line 2: wrong number of fields
+2025/08/02 21:38:46 Couldn't open weekly.csv  :  []  with error:  open public/stats/weekly.csv: no such file or directory
+2025/08/02 21:38:55 Couldn't open weekly.csv  :  []  with error:  open public/stats/weekly.csv: no such file or directory

@@ -5,12 +5,13 @@
 		<h2 class="ui dividing header">View Weekly Stats</h2>
 		<!-- FIRST ROW START -->
 		<div class="columns two wide">
-			<button class="ui button column" id="vsdButton" name="vsd">VSD</button>
-	    <button class="ui button column" id="giButton" name="gi">GI</button>
-			<button class="ui button column" id="expenseButton" name="expenses">Expenses</button>
-	    <button class="ui button column" id="profitButton" name="profit">Profit</button>
-	    <button class="ui button column" id="scheduledButton" name="scheduled">Scheduled</button>
-			<button class="ui button column" id="sitesButton" name="sites">Job Sites Done</button>
+			<button class="ui button column" id="vsdButton" name="VSD">VSD</button>
+	    	<button class="ui button column" id="giButton" name="GI">GI</button>
+			<button class="ui button column" id="expenseButton" name="Expenses">Expenses</button>
+	    	<button class="ui button column" id="profitButton" name="Profit">Profit</button>
+		    <button class="ui button column" id="scheduledButton" name="Scheduled">Scheduled</button>
+			<button class="ui button column" id="sitesButton" name="Sites">Job Sites Done</button>
+			<button class="ui button column" id="outstandingButton" name="Outstanding">Outstanding Collections</button>
 		</div>
 	</div>
 	<div id="container">
@@ -34,34 +35,38 @@
 
 				for (var i = 0; i < dlen; i++){
 					console.log(jsonData[i])
-					dataSeries[i] = jsonData[i].Value
-					dateSeries[i] = jsonData[i].WeekEnding
+					dataSeries[i] = jsonData[i][statName]
+					dateSeries[i] = jsonData[i]["Weekending"]
+					console.log("Found:"+dateSeries)
 				}
 				var vales = ""
 				var b = false
 				switch(statName) {
-					case "gi": vales = "Income"
+					case "GI": vales = "Income"
 						break
-					case "vsd": vales = "Value"
+					case "VSD": vales = "Value"
 						break
-					case "expenses": vales = "Money"
+					case "Expenses": vales = "Money"
 						b = true
 						break
-					case "profit": vales = "Money"
+					case "Profit": vales = "Money"
 						break
-					case "scheduled": vales = "Number Scheduled"
+					case "Scheduled": vales = "Number Scheduled"
 						break
-					case "sites": vales = "Number of Sites"
+					case "Sites": vales = "Number of Sites"
+						break
+					case "Outstanding": vales = "Outstanding Collections"
+						b = true
 						break
 					default: vales = "Number"
 				}
-
 				drawChart(statName.toUpperCase(), b, vales, dateSeries, dataSeries)
 		  });
 		});
 
 		function drawChart(name, b, vales, dateSeries, dataSeries) {
 			console.log(dateSeries)
+			console.log(dataSeries)
 			Highcharts.chart('container', {
 			    chart: {
 			        type: 'line'
@@ -76,7 +81,7 @@
 			        categories: dateSeries
 			    },
 			    yAxis: {
-							reversed: b,
+						reversed: b,
 			        title: {
 			            text: vales
 			        }

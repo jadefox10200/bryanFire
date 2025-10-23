@@ -48,6 +48,12 @@
 						<input type="text" name="scheduled" placeholder="Scheduled" id="scheduled">
 					</div>
 				</div>
+				<div class="three wide field">
+			    <label>Outstanding Collections</label>
+					<div class="field">
+						<input type="text" name="outstanding" placeholder="Outstanding Collections" id="outstanding">
+					</div>
+				</div>
 		  </div>
 			<div class="columns two wide">
 				<!-- <button class="ui button column" onclick="PrepsRFGenerator.generateRoutingForms()">Print Preps Routing Forms</button>	             -->
@@ -69,7 +75,8 @@
 				gi: $("#gi").val(),
 				sites: $("#sites").val(),
 				expenses: $("#expenses").val(),
-				scheduled: $("#scheduled").val()
+				scheduled: $("#scheduled").val(),
+				outstanding: $("#outstanding").val()
       }
       $.ajax({
         type: "POST",
@@ -85,7 +92,8 @@
 				$('input').val('');
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
-				console.log(jqXHR)
+				console.log(errorThrown)
+				console.log("Nothing happened")
 				$("#alertHeader").html("ERROR");
 				$("#alertMessage").html(jqXHR.responseText);
 				$("#alertIcon").html('<i class="ban icon red"></i>');

@@ -10,17 +10,17 @@
 				<!-- W/E FIELD START -->
 				<div class="field weekending">
 					<label>Weekending: </label>
-					<select class="ui dropdown weekendingDates" name="we" id="weDropDown">
+					<select class="ui dropdown weekendingDates" name="we" id="weDropDown" index={{ .Index }}>
 						{{range .Weeks}}
 						<option>{{ . }}</option>
 						{{end}}
 					</select>
 				</div>
 			</div>
-			<div class="columns two wide">
+			<!-- <div class="columns two wide"> -->
 				<!-- <button class="ui button column" onclick="PrepsRFGenerator.generateRoutingForms()">Print Preps Routing Forms</button>	             -->
-				<button class="ui button column check" type="button" id="selectWeekButton">Select Week</button>
-			</div>
+				<!-- <button class="ui button column check" type="button" id="selectWeekButton">Select Week</button> -->
+			<!-- </div> -->
 		</div>
 		<h2 class="ui right left dividing header" id="dateHeader" date={{ .ThisWeekRaw }}>Selected: {{ .ThisWeek}}</h2>
 		<table class="ui celled fixed table" id="statTable">
@@ -58,12 +58,18 @@
 <script>
 	$( document ).ready(function() {
 
+		var index = $("#weDropDown").attr("index")
+		index = index * 1
+		$("#weDropDown").prop("selectedIndex", index)
+
 		$("#inputDailyIcon").css("visibility", "visible")
 		$("#selectWeekButton").on('click', function(){
 			console.log("clicked")
       var thisDate = $("#weDropDown").val()
 			var index = $("#weDropDown").prop("selectedIndex")
 			console.log(thisDate)
+			//USE THIS TO CONTROL SELECTION:
+			// $("#weDropDown").prop("selectedIndex", 1)
 			// similar behavior as clicking on a link
 			window.location.href = "/tpl/inputDailyStats?thisWeek=" + thisDate + "&index=" + index;
 		})
@@ -109,6 +115,17 @@
 		})
 		$("#okButton").on('click', function(){
 			$("#alertModal").modal('hide');
+		})
+
+		$("#weDropDown").on('change', function(data){
+			console.log("clicked")
+      var thisDate = $(this).val()
+			var index = $("#weDropDown").prop("selectedIndex")
+			console.log(thisDate)
+			//USE THIS TO CONTROL SELECTION:
+			// $("#weDropDown").prop("selectedIndex", 1)
+			// similar behavior as clicking on a link
+			window.location.href = "/tpl/inputDailyStats?thisWeek=" + thisDate + "&index=" + index;
 		})
 
 	})

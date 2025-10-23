@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -31,6 +32,7 @@ func main() {
 	http.HandleFunc("/services/getWeeklyStats", handleWeeklyStatsRequest)
 	http.HandleFunc("/services/getDailyStats", handleDailyStatsRequest)
 	http.HandleFunc("/services/save7R", handleSave7R)
+	http.HandleFunc("/services/saveWeeklyEdit", handleSaveWeeklyEdit)
 	http.HandleFunc("/services/logWeeklyStats", handleLogWeeklyStats)
 	http.HandleFunc("/tpl/", handleTemplates)
 
@@ -753,200 +755,54 @@ type FloatWeeklyStatValue struct {
 	Value      float64
 }
 
+type SingleWeeklyStat struct {
+	WeekEnding string  `csv:"we" json:"Weekending"`
+	GI         float64 `csv:"gi" json:"GI"`
+	VSD        float64 `csv:"vsd" json:"VSD"`
+	Expenses   float64 `csv:"expenses" json:"Expenses"`
+	Scheduled  int     `csv:"scheduled" json:"Scheduled"`
+	Sites      int     `csv:"sites" json:"Sites"`
+	Outstanding	int     `csv:"outstanding" json:"Outstanding"`
+	Profit     float64 `csv:"-"`
+}
+
 func handleWeeklyStatsRequest(w http.ResponseWriter, r *http.Request) {
 
 	q := r.URL.Query()
 	statName := q.Get("stat")
 
-	switch statName {
-	case "gi", "vsd", "expenses":
-		fileName := fmt.Sprintf("public/stats/%s.csv", statName)
+	statSlice := make([]SingleWeeklyStat, 0)
 
-		f, err := os.Open(fileName)
-		if err != nil {
-			msg := fmt.Sprintf("Failed to open file %s", fileName)
-			webFail(msg, w, err)
-			return
-		}
-		statValues := make([]FloatWeeklyStatValue, 0)
-		scanner := bufio.NewScanner(f)
-		for scanner.Scan() {
-			line := scanner.Text()
-			lineSep := strings.Split(line, ",")
-			if len(lineSep) != 2 {
-				msg := fmt.Sprintf("Couldn't split line: %v\n", line)
-				webFail(msg, w, err)
-				return
-			}
-			m, err := StringToMoney(lineSep[1])
-			if err != nil {
-				msg := fmt.Sprintf("Couldn't convert money %v", lineSep[1])
-				webFail(msg, w, err)
-				return
-			}
-			i := m.MoneyToUSD().Float64()
-			stat := FloatWeeklyStatValue{
-				WeekEnding: lineSep[0],
-				Value:      i,
-			}
-			statValues = append(statValues, stat)
-		}
+	f, err := os.Open("public/stats/weekly.csv")
+	if err != nil {
+		webFail("Failed to open weekly.csv", w, err)
+		return
+	}
+	defer f.Close()
 
-		sort.Slice(statValues, func(i, j int) bool {
-			return statValues[i].WeekEnding < statValues[j].WeekEnding
-		})
+	err = gocsv.UnmarshalFile(f, &statSlice)
+	if err != nil {
+		webFail("Failed to unmarshal file weekly.csv", w, err)
+		return
+	}
 
-		err = json.NewEncoder(w).Encode(statValues)
-		if err != nil {
-			msg := fmt.Sprintf("Failed to encode for stat %s", statName)
-			webFail(msg, w, err)
-			return
-		}
+	//sort the array just in case they were entered out of order
+	sort.Slice(statSlice, func(i, j int) bool {
+		return statSlice[i].WeekEnding < statSlice[j].WeekEnding
+	})
 
-	case "sites", "scheduled":
-		fileName := fmt.Sprintf("public/stats/%s.csv", statName)
+	//build profit:
+	for k, v := range statSlice {
+		gUSD := ToUSD(v.GI)
+		eUSD := ToUSD(v.Expenses)
+		pUSD := gUSD - eUSD
+		statSlice[k].Profit = pUSD.Float64()
+	}
 
-		f, err := os.Open(fileName)
-		if err != nil {
-			msg := fmt.Sprintf("Failed to open file %s", fileName)
-			webFail(msg, w, err)
-			return
-		}
-		statValues := make([]IntWeeklyStatValue, 0)
-		scanner := bufio.NewScanner(f)
-		for scanner.Scan() {
-			line := scanner.Text()
-			lineSep := strings.Split(line, ",")
-			if len(lineSep) != 2 {
-				msg := fmt.Sprintf("Couldn't split line: %v\n", line)
-				webFail(msg, w, err)
-				return
-			}
-			i, err := strconv.Atoi(lineSep[1])
-			if err != nil {
-				msg := fmt.Sprintf("Couldn't convert string to number. The source data is bad: %v", lineSep[1])
-				webFail(msg, w, err)
-				return
-			}
-			stat := IntWeeklyStatValue{
-				WeekEnding: lineSep[0],
-				Value:      i,
-			}
-			statValues = append(statValues, stat)
-		}
-
-		sort.Slice(statValues, func(i, j int) bool {
-			return statValues[i].WeekEnding < statValues[j].WeekEnding
-		})
-
-		err = json.NewEncoder(w).Encode(statValues)
-		if err != nil {
-			msg := fmt.Sprintf("Failed to encode for stat %s", statName)
-			webFail(msg, w, err)
-			return
-		}
-
-	case "profit":
-		expenseFileName := fmt.Sprintf("public/stats/expenses.csv")
-		ef, err := os.Open(expenseFileName)
-		if err != nil {
-			msg := fmt.Sprintf("Failed to open file %s", expenseFileName)
-			webFail(msg, w, err)
-			return
-		}
-		giFileName := fmt.Sprintf("public/stats/gi.csv")
-		gf, err := os.Open(giFileName)
-		if err != nil {
-			msg := fmt.Sprintf("Failed to open file %s", giFileName)
-			webFail(msg, w, err)
-			return
-		}
-
-		eValues := make([]FloatWeeklyStatValue, 0)
-		eScanner := bufio.NewScanner(ef)
-		for eScanner.Scan() {
-			line := eScanner.Text()
-			lineSep := strings.Split(line, ",")
-			if len(lineSep) != 2 {
-				msg := fmt.Sprintf("Couldn't split line: %v\n", line)
-				webFail(msg, w, err)
-				return
-			}
-			m, err := StringToMoney(lineSep[1])
-			if err != nil {
-				msg := fmt.Sprintf("Couldn't convert money %v", lineSep[1])
-				webFail(msg, w, err)
-				return
-			}
-			i := m.MoneyToUSD().Float64()
-			stat := FloatWeeklyStatValue{
-				WeekEnding: lineSep[0],
-				Value:      i,
-			}
-			eValues = append(eValues, stat)
-		}
-
-		sort.Slice(eValues, func(i, j int) bool {
-			return eValues[i].WeekEnding < eValues[j].WeekEnding
-		})
-
-		gValues := make([]FloatWeeklyStatValue, 0)
-		gScanner := bufio.NewScanner(gf)
-		for gScanner.Scan() {
-			line := gScanner.Text()
-			lineSep := strings.Split(line, ",")
-			if len(lineSep) != 2 {
-				msg := fmt.Sprintf("Couldn't split line: %v\n", line)
-				webFail(msg, w, err)
-				return
-			}
-			m, err := StringToMoney(lineSep[1])
-			if err != nil {
-				msg := fmt.Sprintf("Couldn't convert money %v", lineSep[1])
-				webFail(msg, w, err)
-				return
-			}
-			i := m.MoneyToUSD().Float64()
-			stat := FloatWeeklyStatValue{
-				WeekEnding: lineSep[0],
-				Value:      i,
-			}
-			gValues = append(gValues, stat)
-		}
-
-		sort.Slice(gValues, func(i, j int) bool {
-			return gValues[i].WeekEnding < gValues[j].WeekEnding
-		})
-		profitValues := make([]FloatWeeklyStatValue, 0)
-		for k, v := range eValues {
-			if v.WeekEnding != gValues[k].WeekEnding {
-				msg := fmt.Sprintf("Weekendings don't match between the expense weeks and the gi weeks: %s, %s", v.WeekEnding, gValues[k].WeekEnding)
-				webFail(msg, w, errors.New("Failed to match WE"))
-				return
-			}
-
-			//float64 gi to USD
-			gUSD := ToUSD(gValues[k].Value)
-			eUSD := ToUSD(v.Value)
-			pUSD := gUSD - eUSD
-			pFloat := pUSD.Float64()
-			pValue := FloatWeeklyStatValue{
-				WeekEnding: v.WeekEnding,
-				Value:      pFloat,
-			}
-			profitValues = append(profitValues, pValue)
-		}
-
-		err = json.NewEncoder(w).Encode(profitValues)
-		if err != nil {
-			msg := fmt.Sprintf("Failed to encode for stat profit")
-			webFail(msg, w, err)
-			return
-		}
-
-	default:
-		err := errors.New("Stat not found")
-		webFail("", w, err)
+	err = json.NewEncoder(w).Encode(statSlice)
+	if err != nil {
+		msg := fmt.Sprintf("Failed to encode for stat %s", statName)
+		webFail(msg, w, err)
 		return
 	}
 
@@ -956,7 +812,7 @@ func handleWeeklyStatsRequest(w http.ResponseWriter, r *http.Request) {
 func getWeeklyStatData(statName string) (interface{}, error) {
 
 	switch statName {
-	case "gi", "vsd", "expenses":
+	case "gi", "vsd", "expenses", "outstanding":
 		fileName := fmt.Sprintf("public/stats/%s.csv", statName)
 
 		f, err := os.Open(fileName)
@@ -1269,90 +1125,53 @@ func handleLogWeeklyStats(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	vsdFile, err := os.OpenFile("public/stats/vsd.csv", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
-	if err != nil {
-		msg := "Failed to open vsd.csv. You either do not have access to it or is unable to be opened for another reason."
-		webFail(msg, w, err, nil)
+	outstanding := r.FormValue("outstanding")
+	outstandingMoney, err := StringToMoney(outstanding)
+	if err != nil || outstanding == "" {
+		msg := "The Outstanding value entered does not appear to be a valid number or you didn't enter anything. Please do not use any other symbols other than a decimal."
+		webFail(msg, w, err)
 		return
 	}
-	defer vsdFile.Close()
+	outstandingPennies := outstandingMoney.MoneyToUSD()
 
-	giFile, err := os.OpenFile("public/stats/gi.csv", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
+	b, err := FileExists("public/stats/weekly.csv")
 	if err != nil {
-		msg := "Failed to open gi.csv. You either do not have access to it or is unable to be opened for another reason."
-		webFail(msg, w, err, nil)
-		return
-	}
-	defer giFile.Close()
-
-	sitesFile, err := os.OpenFile("public/stats/sites.csv", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
-	if err != nil {
-		msg := "Failed to open sites.csv. You either do not have access to it or is unable to be opened for another reason."
-		webFail(msg, w, err, nil)
-		return
-	}
-	defer sitesFile.Close()
-
-	expensesFile, err := os.OpenFile("public/stats/expenses.csv", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
-	if err != nil {
-		msg := "Failed to open expenses.csv. You either do not have access to it or is unable to be opened for another reason."
-		webFail(msg, w, err, nil)
-		return
-	}
-	defer expensesFile.Close()
-
-	scheduledFile, err := os.OpenFile("public/stats/scheduled.csv", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
-	if err != nil {
-		msg := "Failed to open scheduled.csv. You either do not have access to it or is unable to be opened for another reason."
-		webFail(msg, w, err, nil)
-		return
-	}
-	defer scheduledFile.Close()
-
-	//log data in the files:
-	vsdString := fmt.Sprintf("%s,%v\r\n", date, vsdPennies)
-	_, err = vsdFile.WriteString(vsdString)
-	if err != nil {
-		msg := fmt.Sprintf("Failed to log vsd\n")
-		webFail(msg, w, err, nil)
+		msg := "Couldn't verify if weekly.csv exists"
+		webFail(msg, w, err)
 		return
 	}
 
-	giString := fmt.Sprintf("%s,%v\r\n", date, giPennies)
-	_, err = giFile.WriteString(giString)
-	if err != nil {
-		msg := fmt.Sprintf("Failed to log gi\n")
-		webFail(msg, w, err, nil)
-		return
+	if !b {
+		_, err := os.Create("public/stats/weekly.csv")
+		if err != nil {
+			msg := "Failed to create weekly.csv file"
+			webFail(msg, w, err)
+			return
+		}
+
+		_, err = copyFile("public/stats/template.csv", "public/stats/weekly.csv")
+		if err != nil {
+			webFail("Failed to copy template to weekly.csv", w, err)
+			return
+		}
 	}
 
-	sitesString := fmt.Sprintf("%s,%v\r\n", date, sites)
-	_, err = sitesFile.WriteString(sitesString)
+	f, err := os.OpenFile("public/stats/weekly.csv", os.O_RDWR|os.O_APPEND, 0644)
 	if err != nil {
-		msg := fmt.Sprintf("Failed to log sites\n")
-		webFail(msg, w, err, nil)
-		return
+		log.Fatalf("ERROR: error opening file: %v", err)
 	}
+	defer f.Close()
 
-	expensesString := fmt.Sprintf("%s,%v\r\n", date, expensesPennies)
-	_, err = expensesFile.WriteString(expensesString)
+	line := fmt.Sprintf("%v,%v,%v,%v,%v,%v,%v\n", date, gi, vsd, expenses, scheduled, sites, outstanding)
+	_, err = io.WriteString(f, line)
 	if err != nil {
-		msg := fmt.Sprintf("Failed to log expenses\n")
-		webFail(msg, w, err, nil)
-		return
-	}
-
-	scheduledString := fmt.Sprintf("%s,%s\r\n", date, scheduled)
-	_, err = scheduledFile.WriteString(scheduledString)
-	if err != nil {
-		msg := fmt.Sprintf("Failed to log scheduled\n")
-		webFail(msg, w, err, nil)
+		webFail("Failed to write to weekly.csv", w, err)
 		return
 	}
 
 	// err = errors.New("Custom error message")
 	// webFail("testing a failed", w, err, nil)
-	msg := fmt.Sprintf("The following data was logged:\r\nGI: %v\r\nVSD: %v\r\nJobs: %v\r\nExpenses: %v\r\nScheduled: %v\r\n", giPennies.String(), vsdPennies.String(), sites, expensesPennies.String(), scheduled)
+	msg := fmt.Sprintf("The following data was logged:\r\nGI: %v\r\nVSD: %v\r\nJobs: %v\r\nExpenses: %v\r\nScheduled: %v\r\nOutstanding Collections: %v\r\n", giPennies.String(), vsdPennies.String(), sites, expensesPennies.String(), scheduled, outstandingPennies.String())
 	io.WriteString(w, msg)
 
 	return
@@ -1362,9 +1181,13 @@ func handleLogWeeklyStats(w http.ResponseWriter, r *http.Request) {
 // to show the data that caused the error and the error will also be printed out to these.
 // This call http.Error and sends only the msg back to the client.
 func webFail(msg string, w http.ResponseWriter, err error, data ...interface{}) {
+	fullMsg := msg
+	if err != nil {
+		fullMsg += ": " + err.Error()
+	}
 	log.Println(msg, " : ", data, " with error: ", err)
 	fmt.Println(msg, " : ", data, " with error: ", err)
-	http.Error(w, msg+" "+err.Error(), 500)
+	http.Error(w, fullMsg, 500)
 	return
 }
 
@@ -1428,51 +1251,90 @@ func RenderViewDaily(w http.ResponseWriter, r *http.Request, name string) {
 
 func RenderEditWeekly(w http.ResponseWriter, r *http.Request, name string) {
 
-	var statName string
-	statName = "gi"
-	gi, err := getWeeklyStatData(statName)
+	f, err := os.Open("public/stats/weekly.csv")
 	if err != nil {
-		webFail("", w, err)
-		return
-	}
-	statName = "vsd"
-	vsd, err := getWeeklyStatData(statName)
-	if err != nil {
-		webFail("", w, err)
-		return
-	}
-	statName = "expenses"
-	expenses, err := getWeeklyStatData(statName)
-	if err != nil {
-		webFail("", w, err)
-		return
-	}
-	statName = "sites"
-	sites, err := getWeeklyStatData(statName)
-	if err != nil {
-		webFail("", w, err)
-		return
-	}
-	statName = "profit"
-	profit, err := getWeeklyStatData(statName)
-	if err != nil {
-		webFail("", w, err)
-		return
-	}
-	statName = "scheduled"
-	scheduled, err := getWeeklyStatData(statName)
-	if err != nil {
-		webFail("", w, err)
+		webFail("Couldn't open weekly.csv", w, err)
 		return
 	}
 
-	fmt.Println(gi)
-	fmt.Println(vsd)
-	fmt.Println(expenses)
-	fmt.Println(sites)
-	fmt.Println(profit)
-	fmt.Println(scheduled)
 	//create single data cluster
+	statSlice := make([]SingleWeeklyStat, 0)
+
+	//unmarshal the file:
+	err = gocsv.UnmarshalFile(f, &statSlice)
+	if err != nil {
+		webFail("Failed to unmarshal weekly.csv", w, err)
+		return
+	}
+
+	sort.Slice(statSlice, func(i, j int) bool {
+		return statSlice[i].WeekEnding < statSlice[j].WeekEnding
+	})
+
+	//build profit:
+	for k, v := range statSlice {
+		gUSD := ToUSD(v.GI)
+		eUSD := ToUSD(v.Expenses)
+		pUSD := gUSD - eUSD
+		statSlice[k].Profit = pUSD.Float64()
+	}
+
+	data := struct {
+		Stats []SingleWeeklyStat
+	}{statSlice}
+
+	renderTemplate(w, r, name, data)
+
+	return
+}
+
+func handleSaveWeeklyEdit(w http.ResponseWriter, r *http.Request) {
+
+	statGrid := make([]SingleWeeklyStat, 0)
+
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		webFail("Failed to read r.Body", w, err)
+		return
+	}
+
+	err = json.Unmarshal(body, &statGrid)
+	if err != nil {
+		webFail("Failed to unmarshal body", w, err)
+		return
+	}
+
+	//verify all data:
+	for _, v := range statGrid {
+		date := strings.TrimSpace(v.WeekEnding)
+		err = checkIfValidWE(date)
+		if err != nil {
+			msg := fmt.Sprintf("W/E date %s invalid", v.WeekEnding)
+			webFail(msg, w, err)
+			return
+		}
+	}
+
+	err = os.Remove("public/stats/weekly.csv")
+	if err != nil {
+		webFail("Failed to remove weekly.csv as part of update. The update did not take place", w, err)
+		return
+	}
+
+	f, err := os.Create("public/stats/weekly.csv")
+	if err != nil {
+		webFail("Failed to create weekly.csv", w, err)
+		return
+	}
+
+	err = gocsv.MarshalFile(statGrid, f)
+	if err != nil {
+		webFail("Failed to marshal statGrid into weekly.csv", w, err)
+		return
+	}
+
+	io.WriteString(w, "Saved Weekly stat data")
+
 	return
 }
 
@@ -1483,6 +1345,9 @@ func getWeeks(n int) []string {
 	nextThursday := time.Date(year, time.Month(month), day, 14, 0, 0, 0, time.UTC)
 
 	var weeks []string
+	if time.Now().Format("Monday") == "Thursday" {
+		weeks = append(weeks, nextThursday.Add(time.Hour*24*7).Format("2006-01-02"))
+	}
 	weeks = append(weeks, nextThursday.Format("2006-01-02"))
 	for i := 0; i < n; i++ {
 		nextThursday = nextThursday.Add(time.Hour * -24 * 7)
@@ -1534,9 +1399,12 @@ func RenderInputDaily(w http.ResponseWriter, r *http.Request, name string) {
 	r.ParseForm()
 	_, hasMyParam := r.Form["thisWeek"]
 	thisWeek := ""
+	index := "0"
 	if hasMyParam {
 		q := r.URL.Query()
 		thisWeek = q.Get("thisWeek")
+		//we assume that if we got thisWeek we should also have index...
+		index = q.Get("index")
 	}
 
 	if thisWeek == "" {
@@ -1588,7 +1456,8 @@ func RenderInputDaily(w http.ResponseWriter, r *http.Request, name string) {
 		ThisWeek    string
 		ThisWeekRaw string
 		Stats       []DailyStat
-	}{weeks, thisWeekFormatted, thisWeek, statGrid}
+		Index       string
+	}{weeks, thisWeekFormatted, thisWeek, statGrid, index}
 
 	renderTemplate(w, r, name, data)
 

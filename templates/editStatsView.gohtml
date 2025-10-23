@@ -11,7 +11,7 @@
 			<thead>
 				<tr>
 					<th>Week</th>
-					<th>VSD</th>
+					<th>VSD</th>x
 					<th>GI</th>
 					<th>EXPENSE</th>
 					<th>PROFIT</th>
@@ -22,13 +22,13 @@
 			<tbody id="statTableBody">
 				{{range $keyStat, $valueStat := .Stats}}
 				<tr>
-					<td class="active">{{.Name}}</td>
-					<td contenteditable="true">{{.Thursday}}</td>
-					<td contenteditable="true">{{.Friday}}</td>
-					<td contenteditable="true">{{.Monday}}</td>
-					<td contenteditable="true">{{.Tuesday}}</td>
-					<td contenteditable="true">{{.Wednesday}}</td>
-					<td contenteditable="true">{{.Quota}}</td>
+					<td class="active">{{.WeekEnding}} <i class="trash icon" style="float: right"></i></td>
+					<td contenteditable="true">{{.VSD}}</td>
+					<td contenteditable="true">{{.GI}}</td>
+					<td contenteditable="true">{{.Expenses}}</td>
+					<td contenteditable="false">{{.Profit}}</td>
+					<td contenteditable="true">{{.Sites}}</td>
+					<td contenteditable="true">{{.Scheduled}}</td>
 				</tr>
 				{{end}}
 			</tbody>
@@ -36,6 +36,7 @@
 		<div class="columns two wide">
 			<!-- <button class="ui button column" onclick="PrepsRFGenerator.generateRoutingForms()">Print Preps Routing Forms</button>	             -->
 			<button class="ui positive button column check" type="button" id="saveButton">Save</button>
+			<button class="ui negative button column check" type="button" id="resetButton">Reset</button>
 		</div>
 	</div>
 </div>
@@ -43,13 +44,12 @@
 	$( document ).ready(function() {
 
 		$("#viewEditIcon").css("visibility", "visible")
-		$("#selectWeekButton").on('click', function(){
-			console.log("clicked")
-      var thisDate = $("#weDropDown").val()
-			var index = $("#weDropDown").prop("selectedIndex")
-			console.log(thisDate)
-			// similar behavior as clicking on a link
-			window.location.href = "/tpl/inputDailyStats?thisWeek=" + thisDate + "&index=" + index;
+		$(".trash").on('click', function(event) {
+		    $(this).parent().parent().remove();
+		});
+
+		$("#resetButton").on('click', function(){
+			window.location.href = "/tpl/editStatsView"
 		})
 
 		$("#saveButton").on('click', function(){
@@ -59,21 +59,22 @@
 				var currentRow=$(this);
 
 				var obj={};
-				obj.Name=currentRow.find("td:eq(0)").text();
-				obj.Thursday=currentRow.find("td:eq(1)").text();
-				obj.Friday=currentRow.find("td:eq(2)").text();
-				obj.Monday=currentRow.find("td:eq(3)").text();
-				obj.Tuesday=currentRow.find("td:eq(4)").text();
-				obj.Wednesday=currentRow.find("td:eq(5)").text();
-				obj.Quota=currentRow.find("td:eq(6)").text();
+				obj.WeekEnding=currentRow.find("td:eq(0)").text();
+				obj.VSD=currentRow.find("td:eq(1)").text() *1;
+				obj.GI=currentRow.find("td:eq(2)").text() * 1;
+				obj.Expenses=currentRow.find("td:eq(3)").text() *1;
+				// obj.Tuesday=currentRow.find("td:eq(4)").text();
+				obj.Sites=currentRow.find("td:eq(5)").text() *1;
+				obj.Scheduled=currentRow.find("td:eq(6)").text()*1;
 
 				arrData.push(obj);
 			});
-			var date = $("#dateHeader").attr('date');
-
+			// var date = $("#dateHeader").attr('date');
+			// JSON.parse(arrData)
+			console.log(arrData)
       $.ajax({
         type: "POST",
-        url: "/services/save7R?thisWeek=" + date,
+        url: "/services/saveWeeklyEdit",
         data: JSON.stringify(arrData)
       })
 			.done(function(data) {
