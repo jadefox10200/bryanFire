@@ -3,6 +3,6 @@
 bryanFire
 ErrorLog.txt
 AV/*
-assets/*
+/assets/
 public/dailyStats/*
 public/stats/*
